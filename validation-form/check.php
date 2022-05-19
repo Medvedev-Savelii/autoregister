@@ -13,3 +13,11 @@
         echo 'Недопустимая длина пароля (от 2 до 6 символов)';
         exit();
     }
+
+    $pass = md5($pass."sadasfdgfgfd12321412");
+
+    $mysql = new mysqli('localhost', 'root', '', 'register_db');
+    $mysql->query("INSERT INTO `users` (`login`, `pass`, `name` ) VALUES('$login','$pass','$name')");
+    $mysql->close();
+
+    header('Location: /autoregister');
